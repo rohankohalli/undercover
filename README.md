@@ -1,4 +1,4 @@
-# 🕵️ Undercover Party V2
+#  Undercover Party V2
 
 A real-time multiplayer social deduction word party game built with **React**, **Node.js**, **Socket.IO**, and **Google Gemini API**.
 
