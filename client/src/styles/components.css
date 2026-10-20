@@ -1,0 +1,475 @@
+/* Hero & HomeScreen */
+.hero {
+  max-width: 500px;
+  margin: 40px auto 30px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 7vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  margin-bottom: 16px;
+  font-weight: 850;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin: 16px 0;
+}
+
+.or-divider span {
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+}
+
+.join-row {
+  display: flex;
+  gap: 8px;
+}
+
+.join-row input {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Custom Slider Component */
+.slider-group {
+  margin: 18px 0;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.slider-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.slider-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #202737;
+  border-radius: 99px;
+  outline: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.range-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Timer Ring */
+.timer-ring-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.timer-ring-text {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* QR Code Card */
+.qr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background: #0f131c;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  margin: 18px 0;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.qr-card:hover {
+  border-color: var(--accent);
+}
+
+.qr-card img {
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+}
+
+.room-code-badge {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  margin-top: 10px;
+  color: #fff;
+}
+
+/* Spotlight Stage (Top Stage Hierarchy) */
+.spotlight-stage {
+  background: linear-gradient(180deg, rgba(135, 153, 255, 0.08) 0%, rgba(21, 27, 39, 0.95) 100%);
+  border: 1px solid rgba(135, 153, 255, 0.35);
+  box-shadow: 0 0 35px rgba(135, 153, 255, 0.12);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #374465, #222b40);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 auto 12px;
+  animation: pulse-glow 2.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(135, 153, 255, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(135, 153, 255, 0.45); }
+}
+
+.spotlight-name {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.spotlight-status {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.clue-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* Avatar Dock (Below the Spotlight) */
+.dock-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.dock-header {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+  gap: 10px;
+}
+
+.avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 4px;
+  border-radius: 12px;
+  transition: background 0.12s, transform 0.12s;
+  position: relative;
+}
+
+.avatar-item:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.avatar-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #252e42;
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  position: relative;
+}
+
+.avatar-circle.active-turn {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.avatar-circle.has-clue {
+  border-color: #586a90;
+}
+
+.avatar-badge-icon {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  font-size: 12px;
+  background: #111520;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.avatar-label {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: var(--text-muted);
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avatar-note-tag {
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.avatar-note-tag.safe { background: rgba(72, 213, 151, 0.2); color: var(--green); }
+.avatar-note-tag.unsure { background: rgba(245, 176, 65, 0.2); color: var(--yellow); }
+.avatar-note-tag.sus { background: rgba(243, 91, 108, 0.2); color: var(--red); }
+
+/* Clue Inspector Modal Popover */
+.inspector-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.inspector-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  max-width: 440px;
+  width: 100%;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: pop-in 0.15s ease-out;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.inspector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.inspector-clues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.inspector-clue-item {
+  background: #111520;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.gut-reactions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.reaction-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #1a2233;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  transition: all 0.12s;
+}
+
+.reaction-btn:hover:not(:disabled) {
+  background: #232d44;
+}
+
+.reaction-btn.active.safe { background: rgba(72, 213, 151, 0.25); color: var(--green); border-color: var(--green); }
+.reaction-btn.active.unsure { background: rgba(245, 176, 65, 0.25); color: var(--yellow); border-color: var(--yellow); }
+.reaction-btn.active.sus { background: rgba(243, 91, 108, 0.25); color: var(--red); border-color: var(--red); }
+
+/* Voting Ballot with Private Tag Parenthesis */
+.ballot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.ballot-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-main);
+  transition: all 0.12s;
+}
+
+.ballot-item:hover {
+  background: var(--bg-card-hover);
+  border-color: #435270;
+}
+
+.ballot-item.selected {
+  border-color: var(--accent);
+  background: rgba(135, 153, 255, 0.12);
+}
+
+.ballot-player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ballot-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Secret Identity Card / Hold to reveal */
+.secret-card {
+  background: linear-gradient(145deg, #1f273b, #121724);
+  border: 1px solid #3d4a66;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  margin: 18px 0;
+}
+
+.secret-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.secret-word {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin: 8px 0 16px;
+}
+
+.hold-to-reveal-btn {
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 18px;
+  border-radius: 12px;
+  background: #252e42;
+  border: 2px dashed #4b5a7a;
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  width: 100%;
+  transition: all 0.1s;
+}
+
+.hold-to-reveal-btn:active {
+  background: var(--accent);
+  color: #0b0f17;
+  border-color: var(--accent);
+}

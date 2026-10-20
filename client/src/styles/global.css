@@ -1,0 +1,248 @@
+:root {
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg-dark: #0d111a;
+  --bg-card: #151b27;
+  --bg-card-hover: #1c2433;
+  --bg-input: #0b0f17;
+  --border: #283245;
+  --border-focus: #7a8eff;
+  --text-main: #f0f3fa;
+  --text-muted: #8b97b0;
+  --text-dim: #5c6882;
+  --accent: #8799ff;
+  --accent-glow: rgba(135, 153, 255, 0.25);
+  --green: #48d597;
+  --yellow: #f5b041;
+  --red: #f35b6c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text-main);
+  background: radial-gradient(circle at 50% 0%, #1a2236 0%, #0d111a 75%);
+  min-height: 100vh;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.shell {
+  max-width: 720px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+.topbar {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand span {
+  color: var(--accent);
+}
+
+.connection {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.connection i {
+  width: 7px;
+  height: 7px;
+  background: var(--yellow);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.connection.online i {
+  background: var(--green);
+}
+
+/* Panels */
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  margin-bottom: 20px;
+}
+
+.panel h2 {
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.sub, .muted {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Buttons & Inputs */
+input, select {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: #fff;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input:focus, select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.primary, .secondary, .ghost {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform 0.12s, background 0.12s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primary {
+  background: var(--accent);
+  color: #0b0f17;
+}
+
+.primary:hover:not(:disabled) {
+  background: #9fb0ff;
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: #202737;
+  color: #e2e8f5;
+  border: 1px solid var(--border);
+}
+
+.secondary:hover:not(:disabled) {
+  background: #283145;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.ghost:hover {
+  color: #fff;
+}
+
+.full {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.small {
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* Status alerts */
+.notice, .error {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+.notice {
+  background: #173328;
+  color: #8be1b5;
+  border: 1px solid #2a5240;
+}
+
+.error {
+  background: #391e24;
+  color: #ff9da9;
+  border: 1px solid #5d2a34;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 480px) {
+  .shell {
+    padding: 0 14px;
+  }
+  .panel {
+    padding: 18px;
+  }
+}
