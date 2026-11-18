@@ -223,7 +223,7 @@ export default function App() {
       )}
 
       <footer>
-        <span>UNDERCOVER PARTY</span>
+        <span>UNDERCOVER PARTY · BY ROHAN</span>
         <span>BLUFF SMART. TRUST SLOWLY.</span>
       </footer>
     </main>

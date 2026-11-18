@@ -133,6 +133,9 @@ export function registerSocketHandlers(io, socket) {
       if (uc > maxSpecial) uc = maxSpecial;
       str = Math.max(0, maxSpecial - uc);
     }
+    if (uc + str < 1) {
+      uc = 1;
+    }
 
     room.settings = {
       ...room.settings,

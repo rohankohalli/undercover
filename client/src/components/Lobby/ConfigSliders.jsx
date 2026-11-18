@@ -34,13 +34,16 @@ export default function ConfigSliders({ settings, onUpdate, isHost }) {
     let newUc = undercovers;
     let newStr = strangers;
 
-    if (newCount === 3) {
-      // At 3 players: max special is 1 (pick 1 UC or 1 Stranger)
+    if (newUc + newStr > newMaxSpecial) {
+      if (newUc > newMaxSpecial) {
+        newUc = newMaxSpecial;
+        newStr = 0;
+      } else {
+        newStr = Math.max(0, newMaxSpecial - newUc);
+      }
+    }
+    if (newUc === 0 && newStr === 0) {
       newUc = 1;
-      newStr = 0;
-    } else if (newUc + newStr > newMaxSpecial) {
-      newUc = Math.min(newUc, newMaxSpecial);
-      newStr = Math.max(0, newMaxSpecial - newUc);
     }
 
     const newSuggestedRounds =
@@ -56,20 +59,22 @@ export default function ConfigSliders({ settings, onUpdate, isHost }) {
 
   const handleUndercoverChange = newUc => {
     let newStr = strangers;
-    if (playerCount === 3) {
-      newStr = newUc > 0 ? 0 : 1;
-    } else if (newUc + newStr > maxSpecial) {
+    if (newUc + newStr > maxSpecial) {
       newStr = Math.max(0, maxSpecial - newUc);
+    }
+    if (newUc === 0 && newStr === 0) {
+      newStr = 1;
     }
     onUpdate({ undercovers: newUc, strangers: newStr });
   };
 
   const handleStrangerChange = newStr => {
     let newUc = undercovers;
-    if (playerCount === 3) {
-      newUc = newStr > 0 ? 0 : 1;
-    } else if (newUc + newStr > maxSpecial) {
-      newUc = Math.max(1, maxSpecial - newStr);
+    if (newStr + newUc > maxSpecial) {
+      newUc = Math.max(0, maxSpecial - newStr);
+    }
+    if (newStr === 0 && newUc === 0) {
+      newUc = 1;
     }
     onUpdate({ undercovers: newUc, strangers: newStr });
   };
@@ -93,7 +98,7 @@ export default function ConfigSliders({ settings, onUpdate, isHost }) {
       <Slider
         label="🕵️ Undercovers"
         value={undercovers}
-        min={playerCount === 3 ? 0 : 1}
+        min={0}
         max={maxSpecial}
         disabled={!isHost}
         onChange={handleUndercoverChange}
@@ -105,10 +110,10 @@ export default function ConfigSliders({ settings, onUpdate, isHost }) {
         label="👤 Strangers (No Word, Can Bluff)"
         value={strangers}
         min={0}
-        max={playerCount === 3 ? 1 : Math.max(0, maxSpecial - 1)}
+        max={maxSpecial}
         disabled={!isHost}
         onChange={handleStrangerChange}
-        formatValue={v => `${v} (Can be 0)`}
+        formatValue={v => `${v} (Max ${maxSpecial})`}
       />
 
       {/* Category selector */}

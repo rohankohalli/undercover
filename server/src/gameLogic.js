@@ -59,7 +59,11 @@ export function checkWinner(room, io) {
 
   // 2. Infiltrators equal or outnumber Innocents -> Infiltrators win!
   if (totalInfiltrators >= innocentsAlive) {
-    finish(room, 'undercover', 'Infiltrators have outsmarted the group and survived!', io);
+    const winnerRole = undercoversAlive > 0 ? 'undercover' : 'stranger';
+    const message = undercoversAlive > 0
+      ? 'Infiltrators have outsmarted the group and survived!'
+      : 'The Stranger outsmarted the group and survived!';
+    finish(room, winnerRole, message, io);
     return true;
   }
 
@@ -93,8 +97,9 @@ export function assignRoles(room) {
   }
 
   room.roles = {};
-  const numUndercovers = Math.min(room.settings.undercovers, Math.floor(players.length / 2));
-  const numStrangers = Math.min(room.settings.strangers, Math.floor((players.length - 1) / 2) - numUndercovers);
+  const maxSpecial = Math.floor((players.length - 1) / 2);
+  const numUndercovers = Math.min(room.settings.undercovers, maxSpecial);
+  const numStrangers = Math.min(room.settings.strangers, maxSpecial - numUndercovers);
 
   let idx = 0;
   for (let i = 0; i < numUndercovers; i++) {
@@ -251,7 +256,13 @@ export function resolveVotes(room, io) {
 export function proceedToNextRound(room, io) {
   // Check if max rounds reached
   if (room.round >= room.settings.maxRounds) {
-    finish(room, 'undercover', `Max rounds (${room.settings.maxRounds}) reached! Undercover survived!`, io);
+    const living = active(room);
+    const undercoversAlive = living.filter(p => room.roles[p.id] === ROLES.UNDERCOVER).length;
+    const winnerRole = undercoversAlive > 0 ? 'undercover' : 'stranger';
+    const message = undercoversAlive > 0
+      ? `Max rounds (${room.settings.maxRounds}) reached! Undercover survived!`
+      : `Max rounds (${room.settings.maxRounds}) reached! Stranger survived!`;
+    finish(room, winnerRole, message, io);
     return;
   }
 

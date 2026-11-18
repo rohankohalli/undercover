@@ -40,13 +40,45 @@ export default function PnPGame({ onExit }) {
     });
 
     const newMaxSpecial = Math.floor((newCount - 1) / 2);
-    if (newCount === 3) {
-      setUndercovers(1);
-      setStrangers(0);
-    } else if (undercovers + strangers > newMaxSpecial) {
-      setUndercovers(Math.min(undercovers, newMaxSpecial));
-      setStrangers(Math.max(0, newMaxSpecial - Math.min(undercovers, newMaxSpecial)));
+    let newUc = undercovers;
+    let newStr = strangers;
+    if (newUc + newStr > newMaxSpecial) {
+      if (newUc > newMaxSpecial) {
+        newUc = newMaxSpecial;
+        newStr = 0;
+      } else {
+        newStr = Math.max(0, newMaxSpecial - newUc);
+      }
     }
+    if (newUc === 0 && newStr === 0) {
+      newUc = 1;
+    }
+    setUndercovers(newUc);
+    setStrangers(newStr);
+  };
+
+  const handleUndercoverChange = newUc => {
+    let newStr = strangers;
+    if (newUc + newStr > maxSpecial) {
+      newStr = Math.max(0, maxSpecial - newUc);
+    }
+    if (newUc === 0 && newStr === 0) {
+      newStr = 1;
+    }
+    setUndercovers(newUc);
+    setStrangers(newStr);
+  };
+
+  const handleStrangerChange = newStr => {
+    let newUc = undercovers;
+    if (newStr + newUc > maxSpecial) {
+      newUc = Math.max(0, maxSpecial - newStr);
+    }
+    if (newStr === 0 && newUc === 0) {
+      newUc = 1;
+    }
+    setUndercovers(newUc);
+    setStrangers(newStr);
   };
 
   const startGame = () => {
@@ -173,8 +205,10 @@ export default function PnPGame({ onExit }) {
       setStep('result');
     } else if (totalInfiltrators >= innocentsAlive) {
       setResult({
-        winner: 'undercover',
-        message: 'Infiltrators equal or outnumber Innocents! Infiltrators win!'
+        winner: undercoversAlive > 0 ? 'undercover' : 'stranger',
+        message: undercoversAlive > 0
+          ? 'Infiltrators equal or outnumber Innocents! Infiltrators win!'
+          : 'The Stranger outsmarted the group and survived!'
       });
       setStep('result');
     } else {
@@ -210,16 +244,16 @@ export default function PnPGame({ onExit }) {
             <Slider
               label="Undercovers"
               value={undercovers}
-              min={playerCount === 3 ? 0 : 1}
+              min={0}
               max={maxSpecial}
-              onChange={v => setUndercovers(v)}
+              onChange={handleUndercoverChange}
             />
             <Slider
               label="Strangers"
               value={strangers}
               min={0}
-              max={playerCount === 3 ? 1 : Math.max(0, maxSpecial - 1)}
-              onChange={v => setStrangers(v)}
+              max={maxSpecial}
+              onChange={handleStrangerChange}
             />
           </div>
 
